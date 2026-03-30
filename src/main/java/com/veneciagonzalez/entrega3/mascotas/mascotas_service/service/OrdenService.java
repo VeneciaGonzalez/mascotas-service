@@ -14,9 +14,10 @@ public class OrdenService {
     public OrdenService() {
         // Tipo Long para id, para escalabilidad, sufijo L para indicar valor literal, largo 64 bits de Java
         listaOrdenes.add(new OrdenCompra(1L, "Rabito",    "Alimento",  2, "Completado"));
-        listaOrdenes.add(new OrdenCompra(2L, "Caina",     "Arena",     1, "Pendiente"));
-        listaOrdenes.add(new OrdenCompra(3L, "Tuché",     "Juguete",   3, "Enviado"));
-        listaOrdenes.add(new OrdenCompra(4L, "Rumberito", "Collar",    1, "Procesando"));
+        listaOrdenes.add(new OrdenCompra(2L, "Bambi",     "Collar",    2, "Completado"));
+        listaOrdenes.add(new OrdenCompra(3L, "Caina",     "Arena",     1, "Pendiente"));
+        listaOrdenes.add(new OrdenCompra(4L, "Tuché",     "Juguete",   3, "Enviado"));
+        listaOrdenes.add(new OrdenCompra(5L, "Rumberito", "Collar",    1, "Procesando"));
 
         // listaOrdenes.add(new OrdenCompra(1, "Rabito",    "Alimento",    2, "Completado"));
         // listaOrdenes.add(new OrdenCompra(2, "Caina",     "Arena",       1, "Pendiente"));
@@ -53,5 +54,5 @@ public class OrdenService {
         listaOrdenes.add(ordenNueva);
         return ordenNueva;
     }
-    
+
 }

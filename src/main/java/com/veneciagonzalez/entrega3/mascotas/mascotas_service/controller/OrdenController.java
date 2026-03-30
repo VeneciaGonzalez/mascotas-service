@@ -16,7 +16,7 @@ import java.util.Map;
 @RequestMapping("/ordenes") 
 public class OrdenController {
 
-    
+
     @Autowired 
     private OrdenService ordenService; 
 
@@ -24,6 +24,7 @@ public class OrdenController {
     // Devuelve todas las ordenes en memoria y la nueva orden creada --> http://localhost:8080/ordenes
     @GetMapping 
     public List<OrdenCompra> listarTodas() {
+
         return ordenService.consultaListaOrden();
     }
 

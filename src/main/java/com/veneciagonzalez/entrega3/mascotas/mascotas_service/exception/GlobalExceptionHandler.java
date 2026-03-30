@@ -1,5 +1,4 @@
 package com.veneciagonzalez.entrega3.mascotas.mascotas_service.exception;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
