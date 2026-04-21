@@ -1,58 +1,44 @@
 package com.veneciagonzalez.entrega3.mascotas.mascotas_service.service;
 
-import com.veneciagonzalez.entrega3.mascotas.mascotas_service.model.OrdenCompra;
-import org.springframework.stereotype.Service;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Service
-public class OrdenService {
-    
-    private List<OrdenCompra> listaOrdenes = new ArrayList<>();
+import com.veneciagonzalez.entrega3.mascotas.mascotas_service.dto.OrdenCompraRequestDTO;
+import com.veneciagonzalez.entrega3.mascotas.mascotas_service.dto.OrdenCompraResponseDTO;
 
-    public OrdenService() {
-        // Tipo Long para id, para escalabilidad, sufijo L para indicar valor literal, largo 64 bits de Java
-        listaOrdenes.add(new OrdenCompra(1L, "Rabito",    "Alimento",  2, "Completado"));
-        listaOrdenes.add(new OrdenCompra(2L, "Bambi",     "Collar",    2, "Completado"));
-        listaOrdenes.add(new OrdenCompra(3L, "Caina",     "Arena",     1, "Pendiente"));
-        listaOrdenes.add(new OrdenCompra(4L, "Tuché",     "Juguete",   3, "Enviado"));
-        listaOrdenes.add(new OrdenCompra(5L, "Rumberito", "Collar",    1, "Procesando"));
+public interface OrdenService {
 
-        // listaOrdenes.add(new OrdenCompra(1, "Rabito",    "Alimento",    2, "Completado"));
-        // listaOrdenes.add(new OrdenCompra(2, "Caina",     "Arena",       1, "Pendiente"));
-        // listaOrdenes.add(new OrdenCompra(3, "Tuché",     "Juguete",     3, "Enviado"));
-        // listaOrdenes.add(new OrdenCompra(4, "Rumberito", "Collar",      1, "Procesando"));
+    List<OrdenCompraResponseDTO> obtenerTodas();
 
-    }
+    OrdenCompraResponseDTO obtenerPorId(Long id);
 
-    //Devuelve lista de Ordenes 
-    public List<OrdenCompra> consultaListaOrden() {
-        return listaOrdenes;
-    }
+    List<OrdenCompraResponseDTO> buscarPorEstado(String estado);
 
-    //Devuelve orden por Id
-    public OrdenCompra consultaOrdenesId(Long id) {
+    List<OrdenCompraResponseDTO> buscarPorNombreMascota(String nombreMascota);
 
-        return listaOrdenes.stream()
+    List<OrdenCompraResponseDTO> buscarPorNombreMascotaParcial(String nombreMascota);
 
-        .filter(o -> o.getId().equals(id))
-        .findFirst()
-        .orElse(null);
-    }
+    List<OrdenCompraResponseDTO> buscarPorProducto(String producto);
 
-    
-    //Devuelve total ordenes segun estado  
-    public List<OrdenCompra> consultaEstadoOrden(String estado) {
-        return listaOrdenes.stream()
-                .filter(c -> c.getEstado().equalsIgnoreCase(estado))
-                .collect(Collectors.toList());
-    }
+    List<OrdenCompraResponseDTO> obtenerActivas();
 
-    //Agrega nueva orden
-    public OrdenCompra agregaNuevaOrdenDeCompra(OrdenCompra ordenNueva){
-        listaOrdenes.add(ordenNueva);
-        return ordenNueva;
-    }
+    List<OrdenCompraResponseDTO> obtenerActivasOrdenadasPorFecha();
 
+    List<OrdenCompraResponseDTO> buscarPorEstadoYActivo(String estado);
+
+    List<OrdenCompraResponseDTO> buscarPorCantidadMayorA(Integer cantidad);
+
+    List<OrdenCompraResponseDTO> buscarPorFechaDesde(LocalDateTime fecha);
+
+    List<OrdenCompraResponseDTO> buscarPorRangoFechas(LocalDateTime inicio, LocalDateTime fin);
+
+    List<OrdenCompraResponseDTO> buscarComplejo(String producto);
+
+    OrdenCompraResponseDTO crearOrden(OrdenCompraRequestDTO request);
+
+    OrdenCompraResponseDTO actualizarOrden(Long id, OrdenCompraRequestDTO request);
+
+    boolean eliminarOrden(Long id);
+
+    boolean desactivarOrden(Long id);
 }
