@@ -1,5 +1,9 @@
 package com.veneciagonzalez.entrega3.mascotas.mascotas_service.exception;
 
+// Se elimina este import que no se usara porque @ExceptionHandler(OrdenNotFoundException.class) ya resuelve la clase por su nombre,
+// el import quedó sobrando.
+//import com.veneciagonzalez.entrega3.mascotas.mascotas_service.exception.OrdenNotFoundException;
+
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -59,5 +63,19 @@ public class GlobalExceptionHandler {
         respuesta.put("mensaje", ex.getMessage());
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
+    }
+
+
+    @ExceptionHandler(OrdenNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> manejarOrdenNoEncontrada(OrdenNotFoundException ex) {
+        log.error("Orden no encontrada: {}", ex.getMessage());
+
+        Map<String, Object> respuesta = new HashMap<>();
+        respuesta.put("timestamp", LocalDateTime.now().toString());
+        respuesta.put("status", 404);
+        respuesta.put("error", "Orden no encontrada");
+        respuesta.put("mensaje", ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
     }
 }
